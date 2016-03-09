@@ -161,6 +161,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="lib\webuploader\Uploader.swf" />
+    <Content Include="lib\webuploader\webuploader.css" />
+    <Content Include="lib\webuploader\webuploader.custom.js" />
+    <Content Include="lib\webuploader\webuploader.custom.min.js" />
+    <Content Include="lib\webuploader\webuploader.fis.js" />
+    <Content Include="lib\webuploader\webuploader.flashonly.js" />
+    <Content Include="lib\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="lib\webuploader\webuploader.html5only.js" />
+    <Content Include="lib\webuploader\webuploader.html5only.min.js" />
+    <Content Include="lib\webuploader\webuploader.js" />
+    <Content Include="lib\webuploader\webuploader.min.js" />
+    <Content Include="lib\webuploader\webuploader.noimage.js" />
+    <Content Include="lib\webuploader\webuploader.noimage.min.js" />
+    <Content Include="lib\webuploader\webuploader.nolog.js" />
+    <Content Include="lib\webuploader\webuploader.nolog.min.js" />
+    <Content Include="lib\webuploader\webuploader.withoutimage.js" />
+    <Content Include="lib\webuploader\webuploader.withoutimage.min.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -168,6 +185,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="lib\webuploader\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
