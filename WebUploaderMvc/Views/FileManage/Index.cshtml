@@ -31,6 +31,7 @@
             $btn = $('#ctlBtn'),
             state = 'pending',
             uploader;
+        var saveFolder = '测试';
         uploader = WebUploader.create({
             // 不压缩image
             resize: false,
@@ -41,7 +42,10 @@
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#picker',
-            chunked: true
+            formData: { guid: WebUploader.Base.guid(), saveFolder: saveFolder },
+            chunked: true,
+            chunkSize: 2097152,
+            chunkRetry: 2
         });
         // 当有文件添加进来的时候
         uploader.on('fileQueued', function (file) {
@@ -64,18 +68,45 @@
             $li.find('p.state').text('上传中');
             $percent.css('width', percentage * 100 + '%');
         });
-        uploader.on('uploadSuccess', function (file) {
+
+        uploader.on('uploadSuccess', function (file, response) {
             $('#' + file.id).find('p.state').text('已上传');
+            console.log('uploadSuccess-' + file.name + "-" + JSON.stringify(response));
+            if (response.chunked) {
+                $.post(SERVER_URL,
+                    { guid: response.guid, fileExt: response.fileExt, saveFolder: saveFolder, id: file.id },
+                    function (data) {
+                        if (data.Status) {
+                            console.log("分片上传成功！");
+                        }
+                        else {
+                            console.log("分片上传失败！");
+                        }
+                    },
+                    'json');
+            }
+            else {
+                console.log("上传成功！");
+            }
         });
-        uploader.on('uploadError', function (file) {
+
+        uploader.on('uploadStart', function (file) {
+            console.log(file.name + "开始上传！");
+        });
+        uploader.on('uploadBeforeSend', function (object, data, headers) {
+            console.log(JSON.stringify(data) + "分片上传！");
+        });
+        uploader.on('uploadError', function (file, reason) {
             $('#' + file.id).find('p.state').text('上传出错');
         });
-        uploader.on('Error', function (ddd) {
-            alert("hello");
+        uploader.on('Error', function (type) {
+            alert(type);
         });
         uploader.on('uploadComplete', function (file) {
             $('#' + file.id).find('.progress').fadeOut();
         });
+
+
         uploader.on('all', function (type) {
             if (type === 'startUpload') {
                 state = 'uploading';
